@@ -13,7 +13,7 @@ import java.util.Date;
 @Data
 public class Player {
     @Id
-    private int dni;
+    private Integer dni;
     @Column(nullable = false)
     private String name;
     @Column(nullable = false)
