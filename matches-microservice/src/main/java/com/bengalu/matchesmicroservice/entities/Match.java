@@ -29,6 +29,9 @@ public class Match {
     @Column(nullable = false)
     private String rivalTeam;
 
+    @Column
+    private String status; //played, suspended, not played
+
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
     private List<SelectedPlayer> players;
 
@@ -39,10 +42,11 @@ public class Match {
         this.players = new ArrayList<>();
     }
 
-    public Match(Date date, String stadium, String rival) {
+    public Match(Date date, String stadium, String rival, String status) {
         this.date = date;
         this.stadium = stadium;
         this.rivalTeam = rival;
+        this.status = status;
         this.players = new ArrayList<>();
     }
 

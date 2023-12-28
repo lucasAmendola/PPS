@@ -46,8 +46,9 @@ public class CsvReader {
             Date date = Date.valueOf(row.get("date"));
             String stadium = String.valueOf(row.get("stadium"));
             String rival = String.valueOf(row.get("rivalTeam"));
+            String status = String.valueOf(row.get("status"));
 
-            Match match = new Match(date, stadium, rival);
+            Match match = new Match(date, stadium, rival,status);
             matchRepository.save(match);
         }
     }
@@ -63,7 +64,7 @@ public class CsvReader {
 
             SelectedPlayer selectedPlayer = new SelectedPlayer(dni, surname, name);
             selectedPlayerRepository.save(selectedPlayer);
-            Optional<Match> match = matchRepository.findById(20L);
+            Optional<Match> match = matchRepository.findById(21L);
             System.out.println(match);
             match.get().addPlayer(selectedPlayer);
             matchRepository.save(match.get());

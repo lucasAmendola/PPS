@@ -1,21 +1,26 @@
-date,stadium,rivalTeam
-2023-02-20,La Florida,Deportivo Rauch
-2023-02-27,Predio Jorge Ibañez,Gimnasia
-2023-03-11,La Florida,Argentino de Juarez
-2023-03-18,Agustin F. Berroeta,Independiente
-2023-04-20,La Florida,Sarmiento de Rauch
-2023-04-27,Movediza,Juventud Unida
-2023-05-24,La Florida,Grupo Universitario
-2023-05-31,Damaso Latasa,Ferro
-2023-06-06,La Florida,Club San Jose
-2023-06-13,Gaston Lafon,Juarense
-2023-08-20,La Florida,Unicen
-2023-09-24,Excursionistas, Excursionistas
-2023-09-31,La Florida,Defensores de Ayacucho
-2023-10-08,Filadelfio Mondello,Loma Negra
-2023-10-15,La Florida,Santamarina
-2023-11-19,Figueroa,Deportivo Tandil
-2023-11-26,La Florida,Atletico de Ayacucho
-2023-12-11,Municipal Dr. Jose A. Barbieri,Ateneo de Estrada
-2023-12-18,La Florida,San Lorenzo de Rauch
-2023-12-25,Dr. Miguel Ochoa,Velense
+date,stadium,rivalTeam,status
+2023-02-20,La Florida,Deportivo Rauch,played
+2023-02-27,Predio Jorge Ibañez,Gimnasia,played
+2023-03-11,La Florida,Argentino de Juarez,played
+2023-03-18,Agustin F. Berroeta,Independiente,played
+2023-04-20,La Florida,Sarmiento de Rauch,played
+2023-04-27,Movediza,Juventud Unida,played
+2023-05-24,La Florida,Grupo Universitario,played
+2023-05-31,Damaso Latasa,Ferro,played
+2023-06-06,La Florida,Club San Jose,suspended
+2023-06-13,Gaston Lafon,Juarense,played
+2023-08-20,La Florida,Unicen,played
+2023-09-24,Excursionistas, Excursionistas,played
+2023-09-31,La Florida,Defensores de Ayacucho,played
+2023-10-08,Filadelfio Mondello,Loma Negra,played
+2023-10-15,La Florida,Santamarina,played
+2023-11-19,Figueroa,Deportivo Tandil,played
+2023-11-26,La Florida,Atletico de Ayacucho,played
+2023-12-11,Municipal Dr. Jose A. Barbieri,Ateneo de Estrada,played
+2023-12-18,La Florida,San Lorenzo de Rauch,played
+2023-12-25,Dr. Miguel Ochoa,Velense,played
+2024-01-21,Municipal Gral. San Martin,Gimnasia,not played
+2024-01-28,Municipal Gral. San Martin,Santamarina,not played
+2024-02-05,Municipal Gral. San Martin,Ferro,not played
+2024-02-12,Municipal Gral. San Martin,Independiente,not played
+2024-02-19,Municipal Gral. San Martin,Velense,not played
