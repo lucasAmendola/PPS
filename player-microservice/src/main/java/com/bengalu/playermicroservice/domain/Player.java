@@ -1,5 +1,6 @@
 package com.bengalu.playermicroservice.domain;
 
+import com.bengalu.playermicroservice.service.DTOs.player.request.PlayerRequestDTO;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -13,7 +14,7 @@ import java.util.Date;
 @Data
 public class Player {
     @Id
-    private int dni;
+    private Integer dni;
     @Column(nullable = false)
     private String name;
     @Column(nullable = false)
@@ -38,4 +39,20 @@ public class Player {
     private int category;
     @Column(nullable = false)
     private int insurance;
+
+    public Player(PlayerRequestDTO playerRequest) {
+        this.dni = playerRequest.getDni();
+        this.name = playerRequest.getName();
+        this.surname = playerRequest.getSurname();
+        this.birthdate = playerRequest.getBirthdate();
+        this.height = playerRequest.getHeight();
+        this.weight = playerRequest.getWeight();
+        this.skillfullLeg = playerRequest.getSkillfullLeg();
+        this.position = playerRequest.getPosition();
+        this.bloodType = playerRequest.getBloodType();
+        this.adress = playerRequest.getAdress();
+        this.phoneNumber = playerRequest.getPhoneNumber();
+        this.category = playerRequest.getCategory();
+        this.insurance = playerRequest.getInsurance();
+    }
 }
