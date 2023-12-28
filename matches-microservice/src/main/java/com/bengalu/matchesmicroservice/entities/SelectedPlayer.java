@@ -34,4 +34,10 @@ public class SelectedPlayer {
         this.surnamePlayer = request.getSurnamePlayer();
         this.namePlayer = request.getNamePlayer();
     }
+
+    public SelectedPlayer(Long dni, String surname, String name) {
+        this.dniPlayer = dni;
+        this.surnamePlayer = surname;
+        this.namePlayer = name;
+    }
 }

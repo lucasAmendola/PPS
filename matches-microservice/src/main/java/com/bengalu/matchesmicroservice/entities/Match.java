@@ -29,7 +29,7 @@ public class Match {
     @Column(nullable = false)
     private String rivalTeam;
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
     private List<SelectedPlayer> players;
 
     public Match(MatchRequestDTO request) {
@@ -37,5 +37,22 @@ public class Match {
         this.stadium = request.getStadium();
         this.rivalTeam = request.getRivalTeam();
         this.players = new ArrayList<>();
+    }
+
+    public Match(Date date, String stadium, String rival) {
+        this.date = date;
+        this.stadium = stadium;
+        this.rivalTeam = rival;
+        this.players = new ArrayList<>();
+    }
+
+    public void addPlayer(SelectedPlayer player) {
+        this.players.add(player);
+        //player.setMatch(this);
+    }
+
+    public void removePlayer(SelectedPlayer player) {
+        this.players.remove(player);
+        //player.setMatch(null);
     }
 }
