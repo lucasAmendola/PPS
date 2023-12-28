@@ -27,4 +27,14 @@ public class PlayerController {
     public List<PlayerResponseDTO> getAllPlayers(){
         return this.service.getAllPlayers();
     }
+
+    @PutMapping("/{id}")
+    public ResponseEntity updatePlayer(@RequestBody @Valid PlayerRequestDTO requestDTO, @PathVariable int id){
+        return this.service.updatePlayer(requestDTO, id);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity deletePlayer(@PathVariable int id){
+        return this.service.deletePlayer(id);
+    }
 }
