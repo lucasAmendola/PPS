@@ -1,8 +1,6 @@
 package com.bengalu.playermicroservice.service;
 
 import com.bengalu.playermicroservice.domain.Player;
-import com.bengalu.playermicroservice.domain.PlayerFee;
-import com.bengalu.playermicroservice.repository.PlayerFeeRepository;
 import com.bengalu.playermicroservice.repository.PlayerRepository;
 import com.bengalu.playermicroservice.service.DTOs.player.request.PlayerRequestDTO;
 import com.bengalu.playermicroservice.service.DTOs.player.response.PlayerResponseDTO;
