@@ -1,6 +1,6 @@
-package com.bengalu.playermicroservice.repository;
+package repository;
 
-import com.bengalu.playermicroservice.domain.Fee;
+import domain.Fee;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface FeeRepository extends JpaRepository<Fee, Long> {
