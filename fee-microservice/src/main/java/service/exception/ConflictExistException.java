@@ -1,4 +1,4 @@
-package com.bengalu.playermicroservice.service.exception;
+package service.exception;
 
 import lombok.Getter;
 
