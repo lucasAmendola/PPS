@@ -1,6 +1,5 @@
 package com.bengalu.playermicroservice.controller;
 
-import com.bengalu.playermicroservice.domain.Player;
 import com.bengalu.playermicroservice.service.DTOs.player.request.PlayerRequestDTO;
 import com.bengalu.playermicroservice.service.DTOs.player.response.PlayerResponseDTO;
 import com.bengalu.playermicroservice.service.PlayerService;
@@ -34,12 +33,17 @@ public class PlayerController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity deletePlayer(@PathVariable int id){
+    public ResponseEntity deletePlayer(@PathVariable @Valid int id){
         return this.service.deletePlayer(id);
     }
 
     @GetMapping("/{category}")
-    public List<PlayerResponseDTO> getAllPlayerByCategory(@PathVariable int cat){
-        return this.service.findByCategory(cat);
+    public List<PlayerResponseDTO> getAllPlayerByCategory(@PathVariable @Valid int cat){
+        return this.service.findAllByCategory(cat);
+    }
+
+    @GetMapping("/{id}")
+    public PlayerResponseDTO getById(@PathVariable @Valid int id){
+        return this.service.findById(id);
     }
 }
