@@ -37,4 +37,9 @@ public class PlayerController {
     public ResponseEntity deletePlayer(@PathVariable int id){
         return this.service.deletePlayer(id);
     }
+
+    @GetMapping("/{category}")
+    public List<PlayerResponseDTO> getAllPlayerByCategory(@PathVariable int cat){
+        return this.service.findByCategory(cat);
+    }
 }

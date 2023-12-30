@@ -1,10 +1,6 @@
 package com.bengalu.playermicroservice.service;
 
-import com.bengalu.playermicroservice.domain.Fee;
 import com.bengalu.playermicroservice.domain.Player;
-import com.bengalu.playermicroservice.domain.PlayerFee;
-import com.bengalu.playermicroservice.repository.FeeRepository;
-import com.bengalu.playermicroservice.repository.PlayerFeeRepository;
 import com.bengalu.playermicroservice.repository.PlayerRepository;
 import com.bengalu.playermicroservice.service.DTOs.player.request.PlayerRequestDTO;
 import com.bengalu.playermicroservice.service.DTOs.player.response.PlayerResponseDTO;
@@ -22,12 +18,10 @@ import java.util.stream.Collectors;
 @Service("PlayerService")
 public class PlayerService {
     private PlayerRepository repository;
-    private FeeRepository feeRepository;
     private PlayerFeeRepository playerFeeRepository;
 
-    public PlayerService(PlayerRepository repository, FeeRepository feeRepository, PlayerFeeRepository playerFeeRepository) {
+    public PlayerService(PlayerRepository repository, PlayerFeeRepository playerFeeRepository) {
         this.repository = repository;
-        this.feeRepository = feeRepository;
         this.playerFeeRepository = playerFeeRepository;
     }
 
@@ -85,5 +79,10 @@ public class PlayerService {
         else {
             throw new NotFoundException("Player", "DNI", id);
         }
+    }
+
+    public List<PlayerResponseDTO> findByCategory(int cat) {
+        List<Player> players = this.repository.findAllByCategory(cat);
+        return players.stream().map(player -> new PlayerResponseDTO(player)).collect(Collectors.toList());
     }
 }
