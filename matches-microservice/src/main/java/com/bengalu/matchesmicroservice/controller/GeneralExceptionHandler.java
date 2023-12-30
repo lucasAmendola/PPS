@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import java.util.List;
 
-@RestControllerAdvice(basePackages = "com.appscooter.tripmicroservice.controllers")
+@RestControllerAdvice(basePackages = "com.bengalu.matchesmicroservice.controller")
 public class GeneralExceptionHandler {
 
     @ExceptionHandler(NotFoundException.class)

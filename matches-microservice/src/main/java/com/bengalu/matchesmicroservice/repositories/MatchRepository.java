@@ -13,4 +13,9 @@ public interface MatchRepository extends JpaRepository<Match, Long> {
 
     @Query("SELECT m FROM Match m WHERE m.status =:status")
     List<Match> findAllByStatus(@Param("status") String status);
+
+    @Query("Select m " +
+            "from Match m " +
+            "where :status is null or m.status = :status ")
+    List<Match> searchAllMatchByStatus(@Param("status") String status);
 }

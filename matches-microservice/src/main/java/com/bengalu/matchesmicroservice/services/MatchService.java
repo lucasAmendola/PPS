@@ -3,6 +3,7 @@ package com.bengalu.matchesmicroservice.services;
 import com.bengalu.matchesmicroservice.entities.Match;
 import com.bengalu.matchesmicroservice.repositories.MatchRepository;
 import com.bengalu.matchesmicroservice.repositories.SelectedPlayerRepository;
+import com.bengalu.matchesmicroservice.services.dtos.match.request.SearchMatchesByStatusDTO;
 import com.bengalu.matchesmicroservice.services.dtos.match.response.MatchResponseDTO;
 import com.bengalu.matchesmicroservice.services.exception.NotFoundException;
 import org.springframework.stereotype.Service;
@@ -46,12 +47,12 @@ public class MatchService {
 
     /***
      *
-     * @param status
+     * @param requestStatus
      * @return list of MatchResponseDTO
      */
     @Transactional(readOnly = true)
-    public List<MatchResponseDTO> findAllMatchByStatus(String status) {
-        List<Match> trips = matchRepository.findAllByStatus(status);
+    public List<MatchResponseDTO> findAllMatchByStatus(SearchMatchesByStatusDTO requestStatus) {
+        List<Match> trips = matchRepository.findAllByStatus(requestStatus.getStatus());
         return trips.stream().map(m-> new MatchResponseDTO(m)).collect(Collectors.toList());
     }
 }
