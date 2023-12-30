@@ -21,10 +21,13 @@ public class Fee {
     private Date payDay;
     @Column(nullable = false)
     private Boolean paid;
+    @Column(nullable = false)
+    private int playerID;
 
     public Fee (FeeRequestDTO f){
         this.amount = f.getAmount();
         this.payDay = f.getPayDay();
         this.paid = f.getPaid();
+        this.playerID = f.getPlayerID();
     }
 }

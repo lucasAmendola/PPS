@@ -18,11 +18,9 @@ import java.util.stream.Collectors;
 @Service("PlayerService")
 public class PlayerService {
     private PlayerRepository repository;
-    private PlayerFeeRepository playerFeeRepository;
 
-    public PlayerService(PlayerRepository repository, PlayerFeeRepository playerFeeRepository) {
+    public PlayerService(PlayerRepository repository) {
         this.repository = repository;
-        this.playerFeeRepository = playerFeeRepository;
     }
 
     @Transactional(readOnly = true)
@@ -67,22 +65,26 @@ public class PlayerService {
     @Transactional
     public ResponseEntity deletePlayer(int id) {
         if(this.repository.existsById(id)){
-            List<PlayerFee> fees = this.playerFeeRepository.findPlayerFeeById_Player(id);
-            if(fees.isEmpty()){
-               this.repository.deleteById(id);
-               return new ResponseEntity(id, HttpStatus.OK);
-            }
-            else {
-                throw new ReferencedRowException("Player","fee",id, fees.toString());
-            }
+           this.repository.deleteById(id);
+           return new ResponseEntity(id, HttpStatus.OK);
         }
         else {
             throw new NotFoundException("Player", "DNI", id);
         }
     }
 
-    public List<PlayerResponseDTO> findByCategory(int cat) {
+    public List<PlayerResponseDTO> findAllByCategory(int cat) {
         List<Player> players = this.repository.findAllByCategory(cat);
         return players.stream().map(player -> new PlayerResponseDTO(player)).collect(Collectors.toList());
+    }
+
+    public PlayerResponseDTO findById(int id){
+        if(this.repository.existsById(id)){
+            Player player = this.repository.findById(id).get();
+            return new PlayerResponseDTO(player);
+        }
+        else {
+            throw new NotFoundException("Player", "DNI", id);
+        }
     }
 }

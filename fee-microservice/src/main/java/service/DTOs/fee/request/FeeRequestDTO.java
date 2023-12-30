@@ -26,4 +26,7 @@ public class FeeRequestDTO {
     @NotNull(message = "paid cannot be null")
     @NotEmpty(message = "paid cannot be empty")
     private Boolean paid;
+    @NotNull(message = "playerID cannot be null")
+    @NotEmpty(message = "playerID cannot be empty")
+    private int playerID;
 }
