@@ -1,12 +1,12 @@
 package com.bengalu.matchesmicroservice.controller;
 
 import com.bengalu.matchesmicroservice.services.MatchService;
+import com.bengalu.matchesmicroservice.services.dtos.match.request.MatchRequestDTO;
 import com.bengalu.matchesmicroservice.services.dtos.match.request.SearchMatchesByStatusDTO;
 import com.bengalu.matchesmicroservice.services.dtos.match.response.MatchResponseDTO;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import jakarta.validation.Valid;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -33,5 +33,15 @@ public class MatchController {
     @GetMapping("/{id}")
     public MatchResponseDTO getMatchById(@PathVariable Long id) {
         return this.matchService.findMatchById(id);
+    }
+
+    @PostMapping ("")
+    public ResponseEntity createMatch(@RequestBody @Valid MatchRequestDTO request) {
+        return this.matchService.saveMatch(request);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity updateMatch(@RequestBody @Valid MatchRequestDTO request, @PathVariable Long id) {
+        return this.matchService.updateMatch(request, id);
     }
 }

@@ -1,26 +1,26 @@
-date,stadium,rivalTeam,status
-2023-02-20,La Florida,Deportivo Rauch,played
-2023-02-27,Predio Jorge Ibañez,Gimnasia,played
-2023-03-11,La Florida,Argentino de Juarez,played
-2023-03-18,Agustin F. Berroeta,Independiente,played
-2023-04-20,La Florida,Sarmiento de Rauch,played
-2023-04-27,Movediza,Juventud Unida,played
-2023-05-24,La Florida,Grupo Universitario,played
-2023-05-31,Damaso Latasa,Ferro,played
-2023-06-06,La Florida,Club San Jose,suspended
-2023-06-13,Gaston Lafon,Juarense,played
-2023-08-20,La Florida,Unicen,played
-2023-09-24,Excursionistas, Excursionistas,played
-2023-09-31,La Florida,Defensores de Ayacucho,played
-2023-10-08,Filadelfio Mondello,Loma Negra,played
-2023-10-15,La Florida,Santamarina,played
-2023-11-19,Figueroa,Deportivo Tandil,played
-2023-11-26,La Florida,Atletico de Ayacucho,played
-2023-12-11,Municipal Dr. Jose A. Barbieri,Ateneo de Estrada,played
-2023-12-18,La Florida,San Lorenzo de Rauch,played
-2023-12-25,Dr. Miguel Ochoa,Velense,played
-2024-01-21,Municipal Gral. San Martin,Gimnasia,not played
-2024-01-28,Municipal Gral. San Martin,Santamarina,not played
-2024-02-05,Municipal Gral. San Martin,Ferro,not played
-2024-02-12,Municipal Gral. San Martin,Independiente,not played
-2024-02-19,Municipal Gral. San Martin,Velense,not played
+date,matchDay,status
+2023-02-20,1,played
+2023-02-27,2,played
+2023-03-11,3,played
+2023-03-18,4,played
+2023-04-20,5,played
+2023-04-27,6,played
+2023-05-24,7,played
+2023-05-31,8,played
+2023-06-06,9,suspended
+2023-06-13,10,played
+2023-08-20,1,played
+2023-09-24,2,played
+2023-09-31,3,played
+2023-10-08,4,played
+2023-10-15,5,played
+2023-11-19,6,played
+2023-11-26,7,La,played
+2023-12-11,8,played
+2023-12-18,9,played
+2023-12-25,10,played
+2024-01-21,1,not played
+2024-01-28,2,not played
+2024-02-05,3,not played
+2024-02-12,4,not played
+2024-02-19,5,not played
