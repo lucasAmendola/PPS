@@ -2,8 +2,10 @@ package com.bengalu.matchesmicroservice.services.loadTestData;
 
 import com.bengalu.matchesmicroservice.entities.Match;
 import com.bengalu.matchesmicroservice.entities.SelectedPlayer;
+import com.bengalu.matchesmicroservice.entities.Team;
 import com.bengalu.matchesmicroservice.repositories.MatchRepository;
 import com.bengalu.matchesmicroservice.repositories.SelectedPlayerRepository;
+import com.bengalu.matchesmicroservice.repositories.TeamRepository;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
@@ -18,40 +20,63 @@ import java.sql.SQLException;
 import java.sql.Time;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Optional;
 
 @Component
 public class CsvReader {
     private MatchRepository matchRepository;
     private SelectedPlayerRepository selectedPlayerRepository;
+    private TeamRepository teamRepository;
     private static final String userDir =
             System.getProperty("user.dir") + "/src/main/java/com/bengalu/matchesmicroservice/services/loadTestData/";
 
     @Autowired
-    public CsvReader(MatchRepository mr, SelectedPlayerRepository sr ) throws IOException, SQLException {
+    public CsvReader(MatchRepository mr, SelectedPlayerRepository sr, TeamRepository tr) throws IOException, SQLException {
         this.matchRepository = mr;
         this.selectedPlayerRepository = sr;
+        this.teamRepository = tr;
     }
 
     public void load() throws SQLException, IOException {
-        this.loadMatches();
+        this.loadTeams();
         this.loadSelectedPlayers();
     }
 
-    private void loadMatches() throws IOException, SQLException {
+    private void loadTeams() throws IOException, SQLException {
+        ArrayList<Team> teams = new ArrayList<>();
+        CSVParser parser = CSVFormat.DEFAULT.withHeader().
+                parse(new FileReader(userDir + "team.csv"));
+        for (CSVRecord row : parser) {
+            String name = String.valueOf(row.get("name"));
+            String address = String.valueOf(row.get("address"));
+            String logo = String.valueOf(row.get("logo"));
+
+            Team team = new Team(name,address,logo);
+            teams.add(team);
+            teamRepository.save(team);
+        }
+    }
+
+    /*
+    private void loadMatches(ArrayList<Team> teams) throws IOException, SQLException {
         CSVParser parser = CSVFormat.DEFAULT.withHeader().
                 parse(new FileReader(userDir + "match.csv"));
-
+        int indexTeams = 0;
         for (CSVRecord row : parser) {
             Date date = Date.valueOf(row.get("date"));
-            String stadium = String.valueOf(row.get("stadium"));
-            String rival = String.valueOf(row.get("rivalTeam"));
+            Long matchDay = Long.valueOf(row.get("matchDay"));
             String status = String.valueOf(row.get("status"));
 
-            Match match = new Match(date, stadium, rival,status);
+            Team localTeam = teams.get(indexTeams);
+            Team visitingTeam =
+
+            Match match = new Match(date, matchDay, localTeam, visitingTeam,status);
             matchRepository.save(match);
         }
     }
+
+     */
 
     public void loadSelectedPlayers() throws IOException, SQLException {
         CSVParser parser = CSVFormat.DEFAULT.withHeader().
@@ -61,8 +86,9 @@ public class CsvReader {
             Long dni = Long.valueOf(row.get("dni"));
             String surname = String.valueOf(row.get("surname"));
             String name = String.valueOf(row.get("name"));
+            String category = String.valueOf(row.get("category"));
 
-            SelectedPlayer selectedPlayer = new SelectedPlayer(dni, surname, name);
+            SelectedPlayer selectedPlayer = new SelectedPlayer(dni, surname, name, category);
             selectedPlayerRepository.save(selectedPlayer);
             Optional<Match> match = matchRepository.findById(21L);
             System.out.println(match);

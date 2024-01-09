@@ -19,4 +19,8 @@ public class SelectedPlayerRequestDTO {
     @NotNull(message = "namePlayer cannot be null")
     @NotEmpty(message = "the namePlayer cannot be empty")
     private String namePlayer;
+
+    @NotNull(message = "category cannot be null")
+    @NotEmpty(message = "the category cannot be empty")
+    private String category;
 }

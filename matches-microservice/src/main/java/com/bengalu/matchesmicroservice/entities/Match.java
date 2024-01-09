@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.sql.Date;
+import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,11 +24,17 @@ public class Match {
     @Column
     private Date date;
 
-    @Column(nullable = false)
-    private String stadium;
+    @Column
+    private Time time;
 
-    @Column(nullable = false)
-    private String rivalTeam;
+    @Column
+    private Long matchDay;
+
+    @Column
+    private Team localTeam;
+
+    @Column
+    private Team visitingTeam;
 
     @Column
     private String status; //played, suspended, not played
@@ -37,15 +44,20 @@ public class Match {
 
     public Match(MatchRequestDTO request) {
         this.date = request.getDate();
-        this.stadium = request.getStadium();
-        this.rivalTeam = request.getRivalTeam();
+        this.time = request.getTime();
+        this.matchDay = request.getMatchDay();
+        this.localTeam = request.getLocalTeam();
+        this.visitingTeam = request.getVisitingTeam();
+        this.status = request.getStatus();
         this.players = new ArrayList<>();
     }
 
-    public Match(Date date, String stadium, String rival, String status) {
+    public Match(Date date, Time time, Long matchDay, String stadium, String rival, Team localTeam, Team visitingTeam,String status) {
         this.date = date;
-        this.stadium = stadium;
-        this.rivalTeam = rival;
+        this.time = time;
+        this.matchDay = matchDay;
+        this.localTeam = localTeam;
+        this.visitingTeam = visitingTeam;
         this.status = status;
         this.players = new ArrayList<>();
     }

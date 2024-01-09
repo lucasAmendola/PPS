@@ -1,6 +1,8 @@
 package com.bengalu.matchesmicroservice.services.dtos.match.response;
 
 import com.bengalu.matchesmicroservice.entities.Match;
+import com.bengalu.matchesmicroservice.entities.SelectedPlayer;
+import com.bengalu.matchesmicroservice.entities.Team;
 import com.bengalu.matchesmicroservice.services.dtos.selectedPlayer.response.SelectedPlayerResponseDTO;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -8,21 +10,28 @@ import lombok.NoArgsConstructor;
 
 import java.sql.Date;
 import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class MatchResponseDTO {
 
+    private Long id;
     private Date date;
-    private String stadium;
-    private String rivalTeam;
-    private ArrayList<SelectedPlayerResponseDTO> selectedPlayers;
+    private Long matchDay;
+    private Team localTeam;
+    private Team visitingTeam;
+    private String status;
+    private List<SelectedPlayer> selectedPlayers;
 
     public MatchResponseDTO(Match match) {
+        this.id = match.getId();
         this.date = match.getDate();
-        this.stadium = match.getStadium();
-        this.rivalTeam = match.getRivalTeam();
-        this.selectedPlayers = null;
+        this.matchDay = match.getMatchDay();
+        this.localTeam = match.getLocalTeam();
+        this.visitingTeam = match.getVisitingTeam();
+        this.status = match.getStatus();
+        this.selectedPlayers = match.getPlayers();
     }
 }

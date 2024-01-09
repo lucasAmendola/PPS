@@ -18,4 +18,13 @@ public interface MatchRepository extends JpaRepository<Match, Long> {
             "from Match m " +
             "where :status is null or m.status = :status ")
     List<Match> searchAllMatchByStatus(@Param("status") String status);
+
+    @Query("SELECT m FROM Match m WHERE m.matchDay =:matchDay")
+    Match findByMatchDay(@Param("matchDay") Long matchDay);
+
+    @Query("SELECT m FROM Match m " +
+            "WHERE m.date > current_date " +
+            "ORDER BY m.date " +
+            "LIMIT 1")
+    Match findUpcomingMatch();
 }
