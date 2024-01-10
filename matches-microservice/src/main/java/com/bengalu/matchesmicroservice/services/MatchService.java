@@ -2,6 +2,7 @@ package com.bengalu.matchesmicroservice.services;
 
 import com.bengalu.matchesmicroservice.entities.Match;
 import com.bengalu.matchesmicroservice.entities.SelectedPlayer;
+import com.bengalu.matchesmicroservice.entities.Team;
 import com.bengalu.matchesmicroservice.repositories.MatchRepository;
 import com.bengalu.matchesmicroservice.repositories.SelectedPlayerRepository;
 import com.bengalu.matchesmicroservice.repositories.TeamRepository;
@@ -46,9 +47,13 @@ public class MatchService {
      */
     @Transactional(readOnly = true)
     public MatchResponseDTO findMatchById(Long id) {
-        return matchRepository.findById(id)
-                .map(MatchResponseDTO::new)
-                .orElseThrow(() -> new NotFoundException("Match", "Id", id));
+        Match match = matchRepository.findById(id).get();
+        if(match != null) {
+            Team local = this.teamRepository.findById(match.getLocalTeamId()).get();
+            Team visiting = this.teamRepository.findById(match.getVisitingTeamId()).get();
+            return new MatchResponseDTO(match, local, visiting);
+        }
+        throw new NotFoundException("Match", "ID", id);
     }
 
     /**
@@ -57,12 +62,25 @@ public class MatchService {
      * @throws NoUpcomingGamesException if there are no upcoming games
      */
     @Transactional(readOnly = true)
-    public MatchResponseDTO finduUpcomingMatch() {
+    public MatchResponseDTO findUpcomingMatch() {
         Match match = this.matchRepository.findUpcomingMatch();
         if(match != null) {
-            return new MatchResponseDTO(match);
+            Team local = this.teamRepository.findById(match.getLocalTeamId()).get();
+            Team visiting = this.teamRepository.findById(match.getVisitingTeamId()).get();
+            return new MatchResponseDTO(match, local, visiting);
         }
         throw new NoUpcomingGamesException();
+    }
+
+    /**
+     * get all upcoming matches
+     *
+     * @return List<MatchResponseDTO> list of upcoming matches
+     */
+    @Transactional(readOnly = true)
+    public List<MatchResponseDTO> findAllUpcomingMatches() {
+        List<Match> upcomingMatches = this.matchRepository.findAllUpcomingMatches();
+        return upcomingMatches.stream().map(m-> new MatchResponseDTO(m)).collect(Collectors.toList());
     }
 
     /**
@@ -97,15 +115,23 @@ public class MatchService {
      */
     @Transactional
     public ResponseEntity saveMatch(MatchRequestDTO request) {
-        if(!request.getVisitingTeam().getName().equals(request.getLocalTeam().getName())) {
-            Date dateNow = Date.valueOf(LocalDate.now());
-            if(request.getDate().after(dateNow)) {
-                this.matchRepository.save(new Match(request));
-                return new ResponseEntity(HttpStatus.CREATED);
+        Long idLocal = request.getLocalTeamId();
+        Long idVisiting = request.getVisitingTeamId();
+        if( this.teamRepository.findById(idLocal).get() != null ) {
+            if( this.teamRepository.findById(idVisiting) != null ) {
+                if(idLocal == idVisiting) {
+                    Date dateNow = Date.valueOf(LocalDate.now());
+                    if(request.getDate().after(dateNow)) {
+                        this.matchRepository.save(new Match(request));
+                        return new ResponseEntity(HttpStatus.CREATED);
+                    }
+                    throw new WrongDateException("Match", ""+request.getDate()+"",""+dateNow+"");
+                }
+                throw new SameTeamException();
             }
-            throw new WrongDateException("Match", ""+request.getDate()+"",""+dateNow+"");
+            throw new NotFoundException("Team", "ID", idVisiting);
         }
-        throw new SameTeamException();
+        throw new NotFoundException("Team", "ID", idLocal);
 
     }
 
@@ -125,8 +151,8 @@ public class MatchService {
             if(request.getDate() == matchExisting.get().getDate())
             matchExisting.get().setDate(request.getDate());
             matchExisting.get().setMatchDay(request.getMatchDay());
-            matchExisting.get().setLocalTeam(request.getLocalTeam());
-            matchExisting.get().setVisitingTeam(request.getVisitingTeam());
+            matchExisting.get().setLocalTeamId(request.getLocalTeamId());
+            matchExisting.get().setVisitingTeamId(request.getVisitingTeamId());
             matchExisting.get().setStatus(request.getStatus());
             return new ResponseEntity(id, HttpStatus.ACCEPTED);
         }
@@ -194,31 +220,5 @@ public class MatchService {
         }
         throw new NotFoundException("Match", "ID", id);
     }
-
-    /**
-     * get all players by match and sorted by category
-     *
-     * @param matchId
-     * @return List<ArrayList<SelectedPlayerResponseDTO>> all selected players by match, separated by category
-     */
-    /*
-    @Transactional(readOnly = true)
-    public List<ArrayList<SelectedPlayerResponseDTO>> findAllSelectedPlayerByMatchByCategory(Long matchId) {
-        List<SelectedPlayer> players = this.matchRepository.findById(matchId).get().getPlayers();
-        //cast
-        List<SelectedPlayerResponseDTO> playersResponse = players.stream().map(s-> new SelectedPlayerResponseDTO(s)).collect(Collectors.toList());
-        //groups
-        Map<String, List<SelectedPlayerResponseDTO>> playersByCategory = playersResponse.stream()
-                .collect(Collectors.groupingBy(SelectedPlayerResponseDTO::getCategory));
-
-        List<ArrayList<SelectedPlayerResponseDTO>> result = new ArrayList<>();
-        for (Map.Entry<String, List<SelectedPlayerResponseDTO>> entry : playersByCategory.entrySet()) {
-            result.add(new ArrayList<>(entry.getValue()));
-        }
-
-        return result;
-    }
-
-     */
 
 }

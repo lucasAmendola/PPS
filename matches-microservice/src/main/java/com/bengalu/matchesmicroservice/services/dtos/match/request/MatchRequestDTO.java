@@ -29,11 +29,11 @@ public class MatchRequestDTO {
     @NotEmpty(message = "the category cannot be empty")
     private String category;
 
-    @NotNull(message = "localTeam cannot be null")
-    private Team localTeam;
+    @NotNull(message = "localTeam ID cannot be null")
+    private Long localTeamId;
 
-    @NotNull(message = "visitingTeam cannot be null")
-    private Team visitingTeam;
+    @NotNull(message = "visitingTeam ID cannot be null")
+    private Long visitingTeamId;
 
     @NotNull(message = "status cannot be null")
     @NotEmpty(message = "the status cannot be empty")

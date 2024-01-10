@@ -27,4 +27,9 @@ public interface MatchRepository extends JpaRepository<Match, Long> {
             "ORDER BY m.date " +
             "LIMIT 1")
     Match findUpcomingMatch();
+
+    @Query("SELECT m FROM Match m " +
+            "WHERE m.date > current_date " +
+            "ORDER BY m.date")
+    List<Match> findAllUpcomingMatches();
 }

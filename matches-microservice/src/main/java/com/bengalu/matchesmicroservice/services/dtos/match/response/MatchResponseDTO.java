@@ -26,13 +26,13 @@ public class MatchResponseDTO {
     private String status;
     private List<SelectedPlayer> selectedPlayers;
 
-    public MatchResponseDTO(Match match) {
+    public MatchResponseDTO(Match match, Team local, Team visiting) {
         this.id = match.getId();
         this.date = match.getDate();
         this.matchDay = match.getMatchDay();
         this.category = match.getCategory();
-        this.localTeam = match.getLocalTeam();
-        this.visitingTeam = match.getVisitingTeam();
+        this.localTeam = local;
+        this.visitingTeam = visiting;
         this.status = match.getStatus();
         this.selectedPlayers = match.getPlayers();
     }

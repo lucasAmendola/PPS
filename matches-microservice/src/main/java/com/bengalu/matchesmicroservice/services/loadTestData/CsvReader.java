@@ -67,13 +67,13 @@ public class CsvReader {
         for (CSVRecord row : parser) {
             Date date = Date.valueOf(row.get("date"));
             Time time = Time.valueOf(row.get("time"));
-            Team localTeam = this.teamRepository.findById(Long.valueOf(row.get("localTeam"))).get();
-            Team visitingTeam = this.teamRepository.findById(Long.valueOf(row.get("visitingTeam"))).get();
+            Long localTeamId = Long.valueOf(row.get("localTeam"));
+            Long visitingTeamId = Long.valueOf(row.get("visitingTeam"));
             Long matchDay = Long.valueOf(row.get("matchDay"));
             String category = String.valueOf(row.get("category"));
             String status = String.valueOf(row.get("status"));
 
-            Match match = new Match(date, time, matchDay, category, localTeam, visitingTeam,status);
+            Match match = new Match(date, time, matchDay, category, localTeamId, visitingTeamId,status);
             matchRepository.save(match);
         }
     }

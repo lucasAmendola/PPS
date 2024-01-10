@@ -33,11 +33,11 @@ public class Match {
     @Column(nullable = false)
     private String category;
 
-    @ManyToOne
-    private Team localTeam;
+    @Column
+    private Long localTeamId;
 
-    @ManyToOne
-    private Team visitingTeam;
+    @Column
+    private Long visitingTeamId;
 
     @Column(nullable = false)
     private String status; //played, suspended, not played
@@ -50,19 +50,19 @@ public class Match {
         this.time = request.getTime();
         this.matchDay = request.getMatchDay();
         this.category = request.getCategory();
-        this.localTeam = request.getLocalTeam();
-        this.visitingTeam = request.getVisitingTeam();
+        this.localTeamId = request.getLocalTeamId();
+        this.visitingTeamId = request.getVisitingTeamId();
         this.status = request.getStatus();
         this.players = new ArrayList<>();
     }
 
-    public Match(Date date, Time time, Long matchDay, String category, Team local, Team visiting,String status) {
+    public Match(Date date, Time time, Long matchDay, String category, Long local, Long visiting,String status) {
         this.date = date;
         this.time = time;
         this.matchDay = matchDay;
         this.category = category;
-        this.localTeam = local;
-        this.visitingTeam = visiting;
+        this.localTeamId = local;
+        this.visitingTeamId = visiting;
         this.status = status;
         this.players = new ArrayList<>();
     }
