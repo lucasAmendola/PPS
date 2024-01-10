@@ -1,26 +1,33 @@
-date,matchDay,status
-2023-02-20,1,played
-2023-02-27,2,played
-2023-03-11,3,played
-2023-03-18,4,played
-2023-04-20,5,played
-2023-04-27,6,played
-2023-05-24,7,played
-2023-05-31,8,played
-2023-06-06,9,suspended
-2023-06-13,10,played
-2023-08-20,1,played
-2023-09-24,2,played
-2023-09-31,3,played
-2023-10-08,4,played
-2023-10-15,5,played
-2023-11-19,6,played
-2023-11-26,7,La,played
-2023-12-11,8,played
-2023-12-18,9,played
-2023-12-25,10,played
-2024-01-21,1,not played
-2024-01-28,2,not played
-2024-02-05,3,not played
-2024-02-12,4,not played
-2024-02-19,5,not played
+date,time,localTeam,visitingTeam,matchDay,status,category
+2023-02-20,15:30:00,52,73,1,played,primera
+2023-02-20,13:30:00,52,73,1,played,reserva
+2023-02-20,11:30:00,52,73,1,played,quinta
+2023-02-20,09:30:00,52,73,1,played,sexta
+2023-02-21,15:30:00,52,73,1,played,septima
+2023-02-21,13:30:00,52,73,1,played,octava
+2023-02-21,11:30:00,52,73,1,played,novena
+2023-02-21,09:30:00,52,73,1,played,decima
+2023-02-27,15:30:00,53,52,2,played,primera
+2023-03-11,15:30:00,52,54,3,played,primera
+2023-03-18,15:30:00,55,52,4,played,primera
+2023-04-20,15:30:00,52,56,5,played,primera
+2023-04-27,15:30:00,57,52,6,played,primera
+2023-05-24,15:30:00,52,58,7,played,primera
+2023-05-31,15:30:00,59,52,8,played,primera
+2023-06-06,15:30:00,52,60,9,suspended,primera
+2023-06-13,15:30:00,61,52,10,played,primera
+2023-08-20,15:30:00,52,62,1,played,primera
+2023-09-24,15:30:00,62,52,2,played,primera
+2023-09-31,15:30:00,52,61,3,played,primera
+2023-10-08,15:30:00,60,52,4,played,primera
+2023-10-15,15:30:00,52,59,5,played,primera
+2023-11-19,15:30:00,58,52,6,played,primera
+2023-11-26,15:30:00,52,57,7,La,played,primera
+2023-12-11,15:30:00,56,52,8,played,primera
+2023-12-18,15:30:00,52,55,9,played,primera
+2023-12-25,15:30:00,54,52,10,played,primera
+2024-01-21,15:30:00,52,53,1,not played,primera
+2024-01-28,15:30:00,73,52,2,not played,primera
+2024-02-05,15:30:00,52,60,3,not played,primera
+2024-02-12,15:30:00,61,52,4,not played,primera
+2024-02-19,15:30:00,52,62,5,not played,primera

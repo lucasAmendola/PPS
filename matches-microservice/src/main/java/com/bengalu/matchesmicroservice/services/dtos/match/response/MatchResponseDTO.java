@@ -20,6 +20,7 @@ public class MatchResponseDTO {
     private Long id;
     private Date date;
     private Long matchDay;
+    private String category;
     private Team localTeam;
     private Team visitingTeam;
     private String status;
@@ -29,6 +30,7 @@ public class MatchResponseDTO {
         this.id = match.getId();
         this.date = match.getDate();
         this.matchDay = match.getMatchDay();
+        this.category = match.getCategory();
         this.localTeam = match.getLocalTeam();
         this.visitingTeam = match.getVisitingTeam();
         this.status = match.getStatus();

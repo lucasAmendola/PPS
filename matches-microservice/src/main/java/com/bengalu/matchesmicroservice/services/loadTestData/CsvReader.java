@@ -40,7 +40,8 @@ public class CsvReader {
 
     public void load() throws SQLException, IOException {
         this.loadTeams();
-        this.loadSelectedPlayers();
+        //this.loadMatches();
+        //this.loadSelectedPlayers();
     }
 
     private void loadTeams() throws IOException, SQLException {
@@ -58,25 +59,24 @@ public class CsvReader {
         }
     }
 
-    /*
-    private void loadMatches(ArrayList<Team> teams) throws IOException, SQLException {
+
+    private void loadMatches() throws IOException, SQLException {
         CSVParser parser = CSVFormat.DEFAULT.withHeader().
                 parse(new FileReader(userDir + "match.csv"));
         int indexTeams = 0;
         for (CSVRecord row : parser) {
             Date date = Date.valueOf(row.get("date"));
+            Time time = Time.valueOf(row.get("time"));
+            Team localTeam = this.teamRepository.findById(Long.valueOf(row.get("localTeam"))).get();
+            Team visitingTeam = this.teamRepository.findById(Long.valueOf(row.get("visitingTeam"))).get();
             Long matchDay = Long.valueOf(row.get("matchDay"));
+            String category = String.valueOf(row.get("category"));
             String status = String.valueOf(row.get("status"));
 
-            Team localTeam = teams.get(indexTeams);
-            Team visitingTeam =
-
-            Match match = new Match(date, matchDay, localTeam, visitingTeam,status);
+            Match match = new Match(date, time, matchDay, category, localTeam, visitingTeam,status);
             matchRepository.save(match);
         }
     }
-
-     */
 
     public void loadSelectedPlayers() throws IOException, SQLException {
         CSVParser parser = CSVFormat.DEFAULT.withHeader().
@@ -91,7 +91,6 @@ public class CsvReader {
             SelectedPlayer selectedPlayer = new SelectedPlayer(dni, surname, name, category);
             selectedPlayerRepository.save(selectedPlayer);
             Optional<Match> match = matchRepository.findById(21L);
-            System.out.println(match);
             match.get().addPlayer(selectedPlayer);
             matchRepository.save(match.get());
         }

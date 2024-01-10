@@ -30,13 +30,16 @@ public class Match {
     @Column
     private Long matchDay;
 
-    @Column
+    @Column(nullable = false)
+    private String category;
+
+    @ManyToOne
     private Team localTeam;
 
-    @Column
+    @ManyToOne
     private Team visitingTeam;
 
-    @Column
+    @Column(nullable = false)
     private String status; //played, suspended, not played
 
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
@@ -46,18 +49,20 @@ public class Match {
         this.date = request.getDate();
         this.time = request.getTime();
         this.matchDay = request.getMatchDay();
+        this.category = request.getCategory();
         this.localTeam = request.getLocalTeam();
         this.visitingTeam = request.getVisitingTeam();
         this.status = request.getStatus();
         this.players = new ArrayList<>();
     }
 
-    public Match(Date date, Time time, Long matchDay, String stadium, String rival, Team localTeam, Team visitingTeam,String status) {
+    public Match(Date date, Time time, Long matchDay, String category, Team local, Team visiting,String status) {
         this.date = date;
         this.time = time;
         this.matchDay = matchDay;
-        this.localTeam = localTeam;
-        this.visitingTeam = visitingTeam;
+        this.category = category;
+        this.localTeam = local;
+        this.visitingTeam = visiting;
         this.status = status;
         this.players = new ArrayList<>();
     }

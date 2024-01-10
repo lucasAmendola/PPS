@@ -25,6 +25,10 @@ public class MatchRequestDTO {
     @Min(value = 1, message = "matchDay cannot be less than 0")
     private Long matchDay;
 
+    @NotNull(message = "category cannot be null")
+    @NotEmpty(message = "the category cannot be empty")
+    private String category;
+
     @NotNull(message = "localTeam cannot be null")
     private Team localTeam;
 
@@ -32,7 +36,7 @@ public class MatchRequestDTO {
     private Team visitingTeam;
 
     @NotNull(message = "status cannot be null")
-    @NotEmpty(message = "the rivalTeam cannot be empty")
+    @NotEmpty(message = "the status cannot be empty")
     @Pattern(regexp = "not played|played|suspended", message = " the status must to be one of the 3 options: not played, played, suspended.")
     private String status;
 }

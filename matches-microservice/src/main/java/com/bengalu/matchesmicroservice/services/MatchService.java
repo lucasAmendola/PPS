@@ -20,9 +20,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.Date;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service("MatchService")
@@ -197,18 +195,30 @@ public class MatchService {
         throw new NotFoundException("Match", "ID", id);
     }
 
+    /**
+     * get all players by match and sorted by category
+     *
+     * @param matchId
+     * @return List<ArrayList<SelectedPlayerResponseDTO>> all selected players by match, separated by category
+     */
+    /*
     @Transactional(readOnly = true)
-    public List<SelectedPlayerResponseDTO> findAllSelectedPlayerByMatchIdAndCategory(Long id, String category) {
-        //list of selected players by category, each category contains his players selected
-        List<ArrayList<SelectedPlayerResponseDTO>> categoriesList = new ArrayList<ArrayList<SelectedPlayerResponseDTO>>();
-        List<SelectedPlayerResponseDTO> players = this.findAllSelectedPlayerByMatchId(id);
+    public List<ArrayList<SelectedPlayerResponseDTO>> findAllSelectedPlayerByMatchByCategory(Long matchId) {
+        List<SelectedPlayer> players = this.matchRepository.findById(matchId).get().getPlayers();
+        //cast
+        List<SelectedPlayerResponseDTO> playersResponse = players.stream().map(s-> new SelectedPlayerResponseDTO(s)).collect(Collectors.toList());
+        //groups
+        Map<String, List<SelectedPlayerResponseDTO>> playersByCategory = playersResponse.stream()
+                .collect(Collectors.groupingBy(SelectedPlayerResponseDTO::getCategory));
 
-        for (SelectedPlayerResponseDTO selectedPlayer : players) {
-
+        List<ArrayList<SelectedPlayerResponseDTO>> result = new ArrayList<>();
+        for (Map.Entry<String, List<SelectedPlayerResponseDTO>> entry : playersByCategory.entrySet()) {
+            result.add(new ArrayList<>(entry.getValue()));
         }
 
-
-
+        return result;
     }
+
+     */
 
 }

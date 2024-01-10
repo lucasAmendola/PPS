@@ -13,10 +13,6 @@ import lombok.NoArgsConstructor;
 public class SelectedPlayer {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    @Column
     private Long dniPlayer;
 
     @Column(nullable = false)
@@ -27,10 +23,6 @@ public class SelectedPlayer {
 
     @Column(nullable = false)
     private String category;
-
-
-    //@ManyToOne
-    //private Match match;
 
     public SelectedPlayer(SelectedPlayerRequestDTO request) {
         this.dniPlayer = request.getDniPlayer();

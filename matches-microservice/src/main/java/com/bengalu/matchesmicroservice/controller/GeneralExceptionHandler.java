@@ -1,8 +1,6 @@
 package com.bengalu.matchesmicroservice.controller;
 
-import com.bengalu.matchesmicroservice.services.exception.ConflictExistException;
-import com.bengalu.matchesmicroservice.services.exception.ErrorDTO;
-import com.bengalu.matchesmicroservice.services.exception.NotFoundException;
+import com.bengalu.matchesmicroservice.services.exception.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -19,24 +17,25 @@ public class GeneralExceptionHandler {
         return new ResponseEntity(new ErrorDTO(exception.getMessage()), HttpStatus.NOT_FOUND);
     }
 
+    @ExceptionHandler(SameTeamException.class)
+    public ResponseEntity sameTeamException(SameTeamException exception) {
+        return new ResponseEntity(new ErrorDTO(exception.getMessage()), HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(NoUpcomingGamesException.class)
+    public ResponseEntity noUpcomingGamesException(NoUpcomingGamesException exception) {
+        return new ResponseEntity(new ErrorDTO(exception.getMessage()), HttpStatus.CONFLICT);
+    }
+
+    @ExceptionHandler(WrongDateException.class)
+    public ResponseEntity wrongDateException(WrongDateException exception) {
+        return new ResponseEntity(new ErrorDTO(exception.getMessage()), HttpStatus.BAD_REQUEST);
+    }
+
     @ExceptionHandler(ConflictExistException.class)
     public ResponseEntity conflictExistException(ConflictExistException exception) {
         return new ResponseEntity(new ErrorDTO(exception.getMessage()), HttpStatus.CONFLICT);
     }
-
-    /*
-    @ExceptionHandler(WebClientNotFound.class)
-    public ResponseEntity webClientNotFound(WebClientNotFound exception) {
-        return new ResponseEntity(exception.getMessage(), HttpStatus.NOT_FOUND);
-    }
-
-    @ExceptionHandler(WebClientConflict.class)
-    public ResponseEntity webClientConflict(WebClientConflict exception) {
-        return new ResponseEntity(exception.getMessage(), HttpStatus.CONFLICT);
-    }
-
-     */
-
 
     @ExceptionHandler(MethodArgumentNotValidException.class) //MethodArgumentNotValidException, receives the exception of validations
     public ResponseEntity constraintViolationException(MethodArgumentNotValidException exc){
